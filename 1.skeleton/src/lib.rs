@@ -1,7 +1,7 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::{LazyOption, LookupMap};
 use near_sdk::json_types::U128;
-use near_sdk::{env, near_bindgen, AccountId, Balance, PanicOnDefault, StorageUsage};
+use near_sdk::{env, near, AccountId, BorshStorageKey, PanicOnDefault, StorageUsage};
 
 pub mod ft_core;
 pub mod metadata;
@@ -15,8 +15,8 @@ const DATA_IMAGE_SVG_GT_ICON: &str = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQA
 /// The specific version of the standard we're using
 pub const FT_METADATA_SPEC: &str = "ft-1.0.0";
 
-#[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+#[derive(PanicOnDefault)]
+#[near(contract_state)]
 pub struct Contract {
     /*
         FILL THIS IN
@@ -24,13 +24,14 @@ pub struct Contract {
 }
 
 /// Helper structure for keys of the persistent collections.
-#[derive(BorshSerialize)]
+#[derive(BorshSerialize, BorshStorageKey)]
+#[borsh(crate = "near_sdk::borsh")]
 pub enum StorageKey {
     Accounts,
     Metadata
 }
 
-#[near_bindgen]
+#[near]
 impl Contract {
     /// Initializes the contract with the given total supply owned by the given `owner_id` with
     /// default metadata (for example purposes only).

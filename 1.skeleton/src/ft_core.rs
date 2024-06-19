@@ -2,8 +2,8 @@ use near_sdk::{Gas, ext_contract, PromiseOrValue, assert_one_yocto, PromiseResul
 
 use crate::*;
 
-const GAS_FOR_RESOLVE_TRANSFER: Gas = Gas(5_000_000_000_000);
-const GAS_FOR_FT_TRANSFER_CALL: Gas = Gas(25_000_000_000_000 + GAS_FOR_RESOLVE_TRANSFER.0);
+const GAS_FOR_RESOLVE_TRANSFER: Gas = Gas::from_tgas(5);
+const GAS_FOR_FT_TRANSFER_CALL: Gas = Gas::from_tgas(30);
 
 #[ext_contract(ext_ft_core)]
 pub trait FungibleTokenCore {
@@ -57,7 +57,7 @@ pub trait FungibleTokenCore {
     fn ft_balance_of(&self, account_id: AccountId) -> U128;
 }
 
-#[near_bindgen]
+#[near]
 impl FungibleTokenCore for Contract {
     #[payable]
     fn ft_transfer(&mut self, receiver_id: AccountId, amount: U128, memo: Option<String>) {
@@ -123,7 +123,7 @@ pub trait FungibleTokenReceiver {
     ) -> PromiseOrValue<U128>;
 }
 
-#[near_bindgen]
+#[near]
 impl Contract {
     // Finalize an `ft_transfer_call` chain of cross-contract calls.
     //

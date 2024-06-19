@@ -1,5 +1,5 @@
 use near_sdk::json_types::U128;
-use near_sdk::{env, log, AccountId, Balance, Promise};
+use near_sdk::{env, log, AccountId, Promise};
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::serde::{Deserialize, Serialize};
 
@@ -11,8 +11,7 @@ use crate::*;
 // * `storage_balance_of`
 // The `total` and `available` values are string representations of unsigned
 // 128-bit integers showing the balance of a specific account in yoctoⓃ.
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize)]
-#[serde(crate = "near_sdk::serde")]
+#[near(serializers=[borsh, json])]
 pub struct StorageBalance {
     pub total: U128,
     pub available: U128,
@@ -30,8 +29,7 @@ pub struct StorageBalance {
 // registration, and does not adjust per-user storage over time. A contract
 // which implements `max` must refund deposits that would increase a user's
 // storage balance beyond this amount.
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Deserialize)]
-#[serde(crate = "near_sdk::serde")]
+#[near(serializers=[borsh, json])]
 pub struct StorageBalanceBounds {
     pub min: U128,
     pub max: Option<U128>,
@@ -75,7 +73,7 @@ pub trait StorageManagement {
     fn storage_balance_of(&self, account_id: AccountId) -> Option<StorageBalance>;
 }
 
-#[near_bindgen]
+#[near]
 impl StorageManagement for Contract {
     #[allow(unused_variables)]
     #[payable]
