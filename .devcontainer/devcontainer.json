@@ -10,5 +10,6 @@
         "serayuzgur.crates",
         "tamasfe.even-better-toml"
       ]
-  },
+    }
+  }
 }
