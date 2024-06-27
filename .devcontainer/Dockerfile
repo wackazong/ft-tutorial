@@ -1,6 +1,4 @@
-# choose debian version
-ARG VARIANT="bookworm"
-FROM rust:1-${VARIANT}
+FROM rust:1-slim
 
 # remove imagemagick due to security reasons
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
