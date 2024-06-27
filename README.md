@@ -1,3 +1,3 @@
 # Fungible tokens tutorial
 
-Tutorial: https://docs.near.org/tutorials/fts/introduction
+Tutorial: <https://docs.near.org/tutorials/fts/introduction>
