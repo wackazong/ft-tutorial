@@ -57,4 +57,12 @@ impl Contract {
         */
         todo!(); //remove once code is filled in.
     }
+
+    // Function to clear the state of a contract
+    #[private]
+    pub fn clean(keys: Vec<near_sdk::json_types::Base64VecU8>) {
+        for key in keys.iter() {
+            env::storage_remove(&key.0);
+        }
+    }
 }
