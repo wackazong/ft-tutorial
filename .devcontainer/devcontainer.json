@@ -1,19 +1,24 @@
 {
-   "build":{
-      "dockerfile":"./Dockerfile",
-      "context":"."
+   "build": {
+      "dockerfile": "./Dockerfile",
+      "context": "."
    },
-   "customizations":{
-      "vscode":{
-         "extensions":[
+   "customizations": {
+      "vscode": {
+         "extensions": [
             "rust-lang.rust-analyzer",
             "serayuzgur.crates",
             "tamasfe.even-better-toml",
             "artdiniz.quitcontrol-vscode"
          ],
-         "settings":{
-            "workbench.startupEditor":"none"
+         "settings": {
+            "workbench.startupEditor": "none"
          }
       }
+   },
+   "hostRequirements": {
+      "cpus": 4,
+      "memory": "16gb",
+      "storage": "32gb"
    }
 }
