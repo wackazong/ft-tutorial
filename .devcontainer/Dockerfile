@@ -1,4 +1,4 @@
-FROM rust:1-slim
+FROM rust:1.86.0-slim
 
 # remove imagemagick due to security reasons
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
