@@ -1,4 +1,6 @@
 {
+   "name": "NEAR FT Tutorial Devcontainer",
+   "postStartCommand": "echo \"export PS1='> '\" >> ~/.bashrc",
    "build": {
       "dockerfile": "./Dockerfile",
       "context": "."
